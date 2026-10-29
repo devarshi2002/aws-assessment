@@ -44,8 +44,10 @@ jobs:
         if: github.event_name != 'pull_request'
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
-          aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: arn:aws:iam::808486947900:role/GitHubActionsTerraformAssessment
+          role-session-name: GitHubActionsTerraformAssessment
+          aws-region: ap-south-1
+          audience: sts.amazonaws.com
 
       - name: Terraform fmt
         run: terraform fmt -check -recursive

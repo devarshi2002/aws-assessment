@@ -1,0 +1,13 @@
+aws_region       = "ap-south-1"
+project_name     = "devops-assessment"
+environment      = "assessment"
+instance_type    = "t3.micro"
+db_instance_class = "db.t3.micro"
+desired_capacity = 2
+min_size         = 2
+max_size         = 2
+
+# Leave empty for HTTP-only testing without a domain.
+# For final HTTPS evidence, create/validate an ACM public certificate for a domain you control
+# in ap-south-1, then set certificate_arn = "arn:aws:acm:ap-south-1:ACCOUNT:certificate/ID"
+certificate_arn = ""

@@ -40,6 +40,19 @@ jobs:
         with:
           terraform_version: "1.9.8"
 
+      - name: Diagnose GitHub OIDC availability
+        if: github.event_name != 'pull_request'
+        run: |
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Ref: $GITHUB_REF"
+          echo "Event: $GITHUB_EVENT_NAME"
+          if [ -n "${ACTIONS_ID_TOKEN_REQUEST_URL:-}" ] && [ -n "${ACTIONS_ID_TOKEN_REQUEST_TOKEN:-}" ]; then
+            echo "GitHub OIDC request context is available"
+          else
+            echo "GitHub OIDC request context is missing"
+            exit 1
+          fi
+
       - name: Configure AWS credentials with OIDC
         if: github.event_name != 'pull_request'
         uses: aws-actions/configure-aws-credentials@v4
